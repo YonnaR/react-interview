@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { movies$ } from "./assets/movies";
+import CardList from './components/CardList';
+import Header from './components/Header';
+import ActivityIndicator from './components/ActivityIndicator';
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      isLoading:true,
+      movies:[],
+      filter: null,
+      selectedPage: 0,
+      selectedCount:0
+    }
+    movies$.then(result=>{
+      this.setState(prevState=>({
+        isLoading:false,
+        movies: result,
+        SelectedCount: result.length
+      }))
+    })
+  }
+  
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Header/>
+        {this.state.isLoading?<ActivityIndicator/>:<CardList d={this.state}/>}
       </div>
     );
   }
