@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import "../assets/css/card.css"
+import Card from './Card';
 export default class CardList extends Component {
     constructor(props){
         super(props);
@@ -16,11 +17,11 @@ export default class CardList extends Component {
         })
     }
   render() {
-      console.log(this.state)
+    const {data} = this.state
     return (
-      <div>
-        <h1>HelloWorld</h1>
-      </div>
+        <ul class="cards">
+            {data.map((val , i)=> <Card title={val.title} category={val.category} likes={val.likes} dislikes={val.dislikes}/> )}
+        </ul>
     )
   }
 }

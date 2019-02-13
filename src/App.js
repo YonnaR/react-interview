@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { movies$ } from "./assets/movies";
+import { movies$ } from "./assets/data/movies";
 import CardList from './components/CardList';
 import Header from './components/Header';
-import ActivityIndicator from './components/ActivityIndicator';
+import ActivityIndicator from './components/indicator/ActivityIndicator';
 class App extends Component {
   constructor(props){
     super(props);
