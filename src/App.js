@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { movies$ } from "./assets/data/movies";
 import CardList from './components/CardList';
-import Header from './components/Header';
+import Navbar from './components/Navbar';
 import ActivityIndicator from './components/indicator/ActivityIndicator';
-import Paging from './components/Paging';
+import Paging from './components/buttons/Paging';
+import Category from './components/buttons/Category';
+import SelectCount from './components/buttons/SelectCount';
 class App extends Component {
   constructor(props){
     super(props);
@@ -28,8 +30,8 @@ class App extends Component {
     this.handleDislike = this.handleDislike.bind(this);
     this.handlePageSelect = this.handlePageSelect.bind(this);
     this.handleCountSelect = this.handleCountSelect.bind(this);
-    this.handlePageBack = this.handlePageBack.bind(this);
-    this.handlePageNext = this.handlePageNext.bind(this);
+    this.handleBackPage = this.handleBackPage.bind(this);
+    this.handleNextPage = this.handleNextPage.bind(this);
   }
 
 
@@ -45,9 +47,9 @@ class App extends Component {
 
   handleDislike(m) {
     this.setState(prevState=>({
-      movies: prevState.movie.map(movie => {
+      movies: prevState.movies.map(movie => {
         if (movie.id === m.id) {
-          movie.likes += -1;
+          movie.dislikes += 1;
           return movie;
         } else {
           return movie;
@@ -58,7 +60,7 @@ class App extends Component {
 
   handleLike(m) {
     this.setState(prevState=>({
-      movies: prevState.movie.map(movie => {
+      movies: prevState.movies.map(movie => {
         if (movie.id === m.id) {
           movie.likes += 1;
           return movie;
@@ -73,7 +75,7 @@ class App extends Component {
     this.setState({ page: i });
   }
 
-  handlePageBack() {
+  handleBackPage() {
     this.setState({
       page: Math.max(
         this.state.page - 1,
@@ -81,10 +83,10 @@ class App extends Component {
       )
     });
   }
-  handlePageNext() {
+  handleNextPage() {
     const { count, page, movies } = this.state;
     this.setState({
-      currentSelectedPageIndex: Math.min(
+      page: Math.min(
         page + 1,
         movies.length / count
       )
@@ -112,7 +114,16 @@ class App extends Component {
     console.log(categories)
     return (
       <div className="App">
-        <Header/>
+        <Navbar/>
+        <div className="container">
+          <Category
+            onFilter={this.handleFilter}
+            categories={categories}
+          />
+          <SelectCount 
+            onCountSelect={this.handleCountSelect}
+          />
+        </div>
         {this.state.isLoading?<ActivityIndicator/>:
         <CardList 
           d={filtered} 
@@ -120,7 +131,11 @@ class App extends Component {
           onLike={this.handleLike}
           onDislike={this.handleDislike}
           />}
-          <Paging/>
+          <Paging
+            onBackPage={this.handleBackPage}
+            onNextPage={this.handleNextPage}
+            page={page}
+          />
       </div>
     );
   }

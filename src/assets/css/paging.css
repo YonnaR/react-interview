@@ -1,0 +1,14 @@
+.paging__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+    font-weight: bolder;
+}
+.paging__button {
+    height: 32px;
+    width: 32px;
+}
+.paging__div{
+    margin: 50px;
+}
