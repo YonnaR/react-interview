@@ -11,7 +11,7 @@ export default function Navbar(props) {
 
       <input type="checkbox" id="nav-check"/>
       <div className="nav-links">
-        <a href="https://github.com/YonnaR" target="_blank">Made with <i className="fas fa-heart"></i> by YonnaR</a>
+        <a href="https://github.com/YonnaR" rel="noopener noreferrer" target="_blank">Made with <i className="fas fa-heart"></i> by YonnaR</a>
       </div>
     </div>
   )

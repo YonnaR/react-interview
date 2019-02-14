@@ -120,6 +120,11 @@ class App extends Component {
             onFilter={this.handleFilter}
             categories={categories}
           />
+          <Paging
+            onBackPage={this.handleBackPage}
+            onNextPage={this.handleNextPage}
+            page={page}
+          />
           <SelectCount 
             onCountSelect={this.handleCountSelect}
           />
@@ -131,11 +136,6 @@ class App extends Component {
           onLike={this.handleLike}
           onDislike={this.handleDislike}
           />}
-          <Paging
-            onBackPage={this.handleBackPage}
-            onNextPage={this.handleNextPage}
-            page={page}
-          />
       </div>
     );
   }
