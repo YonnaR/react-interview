@@ -1,44 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LikeIndicator from './indicator/LikeIndicator';
 import DislikeIndicator from './indicator/DislikeIndicator';
+import DislikeButton from './buttons/DislikeButton';
+import LikeButton from './buttons/LikeButton';
 
-export default class Card extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            id: props.id,
-            title: props.title,
-            category: props.category,
-            likes: props.likes,
-            dislikes: props.dislikes,
-            liked:null
-        }
-    }
-    handleLike=()=>{
-        if(this.state.liked==null){
-            this.setState(prevState=>({liked:true,likes:prevState.likes+1}));
-        }
-        else if(this.state.liked){
-            this.setState(prevState=>({likes:prevState.likes+1,dislikes:prevState.dislikes-1}));
-        }else{
-            this.setState(prevState=>({dislikes:prevState.dislikes+1, likes:prevState.likes-1}));
-        }
-    }
-    render() {
-        const { id, title, category, likes, dislikes, liked } = this.state;
-        return (
-            <li class="cards__item">
-                <div class="card">
-                <div class="card__image card__image--fence"></div>
-                <div class="card__content">
-                    <div class="card__title">{title}</div>
-                    <p class="card__category">{category}</p>
-                    <button onClick={this.handleLike} class="btn btn--block card__btn">{liked?"dislikes":"likes"}</button>
-                </div>
-                <LikeIndicator likes={likes} />
-                <DislikeIndicator dislikes={dislikes}/>
-                </div>
-            </li>
-        )
-    }
+
+export default function Card(props){
+  return (
+    <li className="cards__item">
+    <button onClick={props.onDelete} className="card__delete">X</button>
+    <div className="card">
+        <div className="card__image card__image--video"></div>
+        <div className="card__content">
+            <div className="card__title">{props.title}</div>
+            <p className="card__category">{props.category}</p>
+            <div className="card__button">
+                <LikeButton onClick={props.onDislike}/>
+            </div>
+        </div>
+        <div className="card__indicator">
+            <LikeIndicator likes={props.likes} />
+            <DislikeIndicator dislikes={props.dislikes}/>
+        </div>
+    </div>
+</li>
+  )
 }

@@ -63,8 +63,8 @@
     padding-top: 66.6%;
   }
 }
-.card__image--fence {
-  background-image: url(https://unsplash.it/800/600?image=59);
+.card__image--video {
+  background-image: url("https://orbitanalytics.com/wp-content/uploads/2017/09/video-placeholder.jpg");
 }
 .card__title {
   color: #696969;
@@ -77,4 +77,20 @@
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;
+}
+.card__indicator {
+  display: flex;
+  justify-content: space-around;
+}
+.card__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card__delete {
+  position: relative;
+  top: 4px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
 }
